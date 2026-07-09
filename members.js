@@ -5,11 +5,13 @@
    only server secret (the Gemini key) lives in the submit-pitch
    Edge Function, never here.
 
-   >>> FILL THESE IN (see PHASE2-SETUP.md). The anon key is safe to
-       ship publicly; row-level security is what protects the data.
+   Project config lives in site.js (window.MOSAIC_SB), which loads
+   before this file; the fallbacks below only cover loading this
+   file standalone. The publishable key is safe to ship publicly;
+   row-level security is what protects the data.
    =========================================================== */
-var SUPABASE_URL = 'https://acormyhaxaerwbkzcvag.supabase.co';
-var SUPABASE_ANON_KEY = 'sb_publishable_W4wKpdrhSlVWJVKrC8T6wQ_09Jcl_WI';
+var SUPABASE_URL = (window.MOSAIC_SB || {}).url || 'https://acormyhaxaerwbkzcvag.supabase.co';
+var SUPABASE_ANON_KEY = (window.MOSAIC_SB || {}).key || 'sb_publishable_W4wKpdrhSlVWJVKrC8T6wQ_09Jcl_WI';
 
 (function () {
   'use strict';
@@ -27,6 +29,7 @@ var SUPABASE_ANON_KEY = 'sb_publishable_W4wKpdrhSlVWJVKrC8T6wQ_09Jcl_WI';
   var me = null;          // profile row
   var memberCount = 0;
   var openHoldings = [];
+  var pendingApps = [];   // membership applications awaiting officer review
 
   /* ---------- helpers ---------- */
   function esc(s) {
@@ -314,13 +317,16 @@ var SUPABASE_ANON_KEY = 'sb_publishable_W4wKpdrhSlVWJVKrC8T6wQ_09Jcl_WI';
       sb.from('member_allowlist').select('*').order('added_at'),
       sb.from('profiles').select('*').order('created_at'),
       sb.from('app_config').select('*').single(),
-      sb.from('pitches').select('*').eq('status', 'approved_pending_execution').order('updated_at')
+      sb.from('pitches').select('*').eq('status', 'approved_pending_execution').order('updated_at'),
+      sb.from('membership_applications').select('*').eq('status', 'new').order('created_at')
     ]).then(function (out) {
       var allow = out[0].data || [], profiles = out[1].data || [], cfg = out[2].data || {}, pending = out[3].data || [];
+      pendingApps = out[4].data || [];
 
       panel.innerHTML =
         officerConfig(cfg) +
         officerExecute(pending) +
+        officerApplications(pendingApps) +
         officerAllowlist(allow) +
         officerMembers(profiles) +
         officerExports();
@@ -351,6 +357,36 @@ var SUPABASE_ANON_KEY = 'sb_publishable_W4wKpdrhSlVWJVKrC8T6wQ_09Jcl_WI';
     }).join('') : '<li class="muted">Nothing waiting on execution.</li>';
     return '<section class="ocard"><h3>Approved, pending execution</h3>' +
       '<p class="muted">Approved pitches never trade automatically. After you place the trade in the real account, mark it executed here, that\'s what adds it to (or removes it from) the portfolio.</p>' +
+      '<ul class="olist">' + rows + '</ul></section>';
+  }
+
+  function welcomeMailto(app) {
+    var subject = 'Welcome to Mosaic!';
+    var body = 'Hi ' + (app.first_name || 'there') + ',\r\n\r\n' +
+      'Great news: your Mosaic application has been approved!\r\n\r\n' +
+      'You can now sign in and take part:\r\n' +
+      '1. Go to https://mosaicinvesting.org/portfolio\r\n' +
+      '2. Scroll to "Pitches & voting" and enter this email address\r\n' +
+      '3. Click the sign-in link we send you, and you\'re in\r\n\r\n' +
+      'From there you can read the club\'s holdings, submit stock pitches, and vote on every decision. One member, one vote.\r\n\r\n' +
+      'Welcome aboard,\r\nThe Mosaic team';
+    return 'mailto:' + encodeURIComponent(app.email) +
+      '?subject=' + encodeURIComponent(subject) +
+      '&body=' + encodeURIComponent(body);
+  }
+
+  function officerApplications(apps) {
+    var rows = apps.length ? apps.map(function (a) {
+      return '<li><span><b>' + esc((a.first_name || '') + ' ' + (a.last_name || '')) + '</b> · ' + esc(a.email) +
+        (a.age ? ' · age ' + esc(a.age) : '') + (a.country ? ' · ' + esc(a.country) : '') +
+        (a.why ? '<br><i>' + esc(a.why) + '</i>' : '') + '</span>' +
+        '<span class="obtns">' +
+        '<button class="btn btn--gold app-approve" data-id="' + a.id + '">Approve</button>' +
+        '<button class="btn btn--ghost app-decline" data-id="' + a.id + '">Decline</button>' +
+        '</span></li>';
+    }).join('') : '<li class="muted">No new applications.</li>';
+    return '<section class="ocard"><h3>Membership applications</h3>' +
+      '<p class="muted">Submitted through the Join Now page. Approving adds the email to the allowlist so they can sign in here and vote; the system doesn\'t email them, so send them a note to let them know.</p>' +
       '<ul class="olist">' + rows + '</ul></section>';
   }
 
@@ -414,6 +450,40 @@ var SUPABASE_ANON_KEY = 'sb_publishable_W4wKpdrhSlVWJVKrC8T6wQ_09Jcl_WI';
       });
     });
 
+    document.querySelectorAll('.app-approve').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var app = pendingApps.filter(function (a) { return a.id === b.getAttribute('data-id'); })[0];
+        if (!app) return;
+        b.disabled = true;
+        sb.from('member_allowlist').upsert({
+          email: (app.email || '').toLowerCase(),
+          role: 'member',
+          first_name: app.first_name,
+          last_initial: (app.last_name || '').charAt(0).toUpperCase()
+        }).then(function (r) {
+          if (r.error) {
+            say('Could not approve: ' + esc(r.error.message), 'warn');
+            b.disabled = false;
+            return;
+          }
+          sb.from('membership_applications').update({ status: 'approved' }).eq('id', app.id).then(function () {
+            say('Approved ' + esc(app.email) + '. A welcome email draft should open in your mail app; hit send to let them know. '
+              + '(If nothing opened, email them at ' + esc(app.email) + '.)', 'ok');
+            loadOfficer();
+            window.location.href = welcomeMailto(app);
+          });
+        });
+      });
+    });
+
+    document.querySelectorAll('.app-decline').forEach(function (b) {
+      b.addEventListener('click', function () {
+        b.disabled = true;
+        sb.from('membership_applications').update({ status: 'declined' }).eq('id', b.getAttribute('data-id'))
+          .then(function () { loadOfficer(); });
+      });
+    });
+
     $('#al-add').addEventListener('click', function () {
       var email = $('#al-email').value.trim();
       if (!email) return;
@@ -462,12 +532,20 @@ var SUPABASE_ANON_KEY = 'sb_publishable_W4wKpdrhSlVWJVKrC8T6wQ_09Jcl_WI';
   function iso(d) { return d ? new Date(d).toISOString().slice(0, 10) : null; }
 
   function exportPortfolio() {
-    sb.from('holdings').select('*').order('date_added', { ascending: false }).then(function (r) {
+    Promise.all([
+      sb.from('holdings').select('*').order('date_added', { ascending: false }),
+      // carry the performance chart's valueHistory over from the live file
+      fetch('portfolio-data.json', { cache: 'no-store' })
+        .then(function (res) { return res.ok ? res.json() : {}; })
+        .catch(function () { return {}; })
+    ]).then(function (out2) {
+      var r = out2[0], live = out2[1] || {};
       var h = r.data || [];
       var out = {
-        _note: 'Exported from the members area. Fill in any missing company/sector before publishing.',
+        _note: 'Exported from the members area. Fill in any missing company/sector before publishing. valueHistory drives the performance chart; append a {date, value} snapshot after each meeting.',
         sampleData: false,
         asOf: new Date().toISOString().slice(0, 10),
+        valueHistory: live.valueHistory || [],
         holdings: h.map(function (x) {
           var o = {
             ticker: x.ticker, company: x.company || '', sector: x.sector || '',

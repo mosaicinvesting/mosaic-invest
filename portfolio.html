@@ -41,6 +41,37 @@
     </div>
   </section>
 
+  <!-- ============ PERFORMANCE CHART ============ -->
+  <section class="section section--tight" id="performance">
+    <div class="container">
+      <div class="shead reveal">
+        <p class="eyebrow">Performance</p>
+        <h2>The portfolio over time.</h2>
+        <p class="lede">Total value of the shared portfolio, logged by officers after each meeting. Contributions and market moves both show up here.</p>
+      </div>
+      <div class="chart-card reveal" id="chart-card" style="display:none">
+        <div class="chart-head">
+          <div>
+            <p class="chart-label">Portfolio value</p>
+            <p class="chart-value" id="chart-value">$0</p>
+            <p class="chart-delta" id="chart-delta"></p>
+          </div>
+          <div class="range-btns" id="range-btns" role="group" aria-label="Time range">
+            <button class="rbtn" data-range="1" type="button">1M</button>
+            <button class="rbtn" data-range="3" type="button">3M</button>
+            <button class="rbtn" data-range="6" type="button">6M</button>
+            <button class="rbtn is-active" data-range="all" type="button">All</button>
+          </div>
+        </div>
+        <div class="chart-wrap" id="chart-wrap"></div>
+        <details class="chart-data">
+          <summary>View as table</summary>
+          <div class="chart-table-wrap"><table id="chart-table"></table></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
   <!-- ============ CURRENT HOLDINGS ============ -->
   <section class="section">
     <div class="container">
