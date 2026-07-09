@@ -21,6 +21,7 @@
       <ul class="nav-links">
         <li><a href="index.html" data-page="index.html">Home</a></li>
         <li><a href="curriculum.html" data-page="curriculum.html">Curriculum</a></li>
+        <li><a href="portfolio.html" data-page="portfolio.html">Portfolio</a></li>
         <li><a href="about.html" data-page="about.html">About Us</a></li>
         <li><a class="btn" href="join.html">Join Now <span class="arr" aria-hidden="true">→</span></a></li>
       </ul>
@@ -45,7 +46,10 @@
         <!-- form / success -->
         <div class="reveal">
           <div class="form-card">
-            <form id="join-form" novalidate>
+            <form id="join-form" novalidate action="https://formsubmit.co/ajax/joinmosaicinvest@gmail.com" method="POST">
+              <input type="hidden" name="_subject" value="New Mosaic membership application">
+              <input type="hidden" name="_template" value="table">
+              <input type="hidden" name="_captcha" value="false">
               <div class="field row2">
                 <div class="field">
                   <label for="firstName">First name <span class="req">*</span></label>
@@ -87,6 +91,7 @@
               <div class="form-foot">
                 <button type="submit" class="btn btn--lg">Submit application <span class="arr" aria-hidden="true">→</span></button>
                 <p class="form-note">We'll review your application and get back to you by email. No fees, ever.</p>
+                <p class="form-note" id="join-submit-error" style="display:none;color:#b4441f;font-weight:500;">Something went wrong sending your application. Please try again in a moment.</p>
               </div>
             </form>
 
@@ -146,6 +151,7 @@
         <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="curriculum.html">Curriculum</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
           <li><a href="about.html">About Us</a></li>
           <li><a href="join.html">Join Now</a></li>
         </ul>

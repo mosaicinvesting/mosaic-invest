@@ -1,0 +1,38 @@
+{
+  "_note": "SAMPLE DATA for layout preview only. Replace with real member pitches, then set sampleData to false. Each pitch needs: ticker, pitcher (first name + last initial), date (YYYY-MM-DD), thesisSummary, keyRisks, and status: one of 'in discussion', 'voting soon', 'approved', 'declined'. This board is display-only; voting happens in member meetings for now.",
+  "sampleData": true,
+  "pitches": [
+    {
+      "ticker": "NVDA",
+      "pitcher": "Ethan W.",
+      "date": "2026-06-24",
+      "status": "in discussion",
+      "thesisSummary": "The club already agrees AI compute demand is real; the debate is the price. Ethan argues data-center revenue can stay ahead of even aggressive estimates for at least two more years.",
+      "keyRisks": "Valuation leaves little room for error; customers are concentrated among a few big tech buyers who are designing their own chips; the semiconductor cycle always turns eventually."
+    },
+    {
+      "ticker": "NKE",
+      "pitcher": "Grace H.",
+      "date": "2026-06-18",
+      "status": "voting soon",
+      "thesisSummary": "A turnaround pitch: the brand is intact, inventory is finally clean, and a new product cycle is starting while the stock trades near multi-year lows.",
+      "keyRisks": "Turnarounds usually take longer than expected; running brands like On and Hoka keep taking share; a weak consumer cuts back on sneakers early."
+    },
+    {
+      "ticker": "GOOGL",
+      "pitcher": "Sofia M.",
+      "date": "2026-05-12",
+      "status": "approved",
+      "thesisSummary": "Approved 12 votes to 3 and executed on May 21; see current holdings. Sofia's pitch: search cash flows are underpriced relative to the AI and cloud upside they fund.",
+      "keyRisks": "AI chat products could erode search query volume over time; regulators are circling the advertising business on two continents."
+    },
+    {
+      "ticker": "GME",
+      "pitcher": "Leo D.",
+      "date": "2026-06-02",
+      "status": "declined",
+      "thesisSummary": "A momentum pitch built around meme-cycle attention. The club declined it: excitement isn't a thesis, and the pitch had no valuation logic. It's now our reference example of what a pitch needs before it can reach a vote.",
+      "keyRisks": "The pitch itself named none, which was part of the problem."
+    }
+  ]
+}

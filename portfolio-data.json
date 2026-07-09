@@ -1,0 +1,74 @@
+{
+  "_note": "SAMPLE DATA for layout preview only. Replace with Mosaic's real positions, then set sampleData to false to hide the sample-data badge on the site. Dates are YYYY-MM-DD. Each holding needs: ticker, company, sector, dateAdded, pitchedBy (first name + last initial), status ('open' or 'closed'), thesis (2-4 sentences). Closed positions should also include whatWeLearned and dateClosed.",
+  "sampleData": true,
+  "asOf": "2026-07-01",
+  "holdings": [
+    {
+      "ticker": "AAPL",
+      "company": "Apple",
+      "sector": "Consumer Tech",
+      "dateAdded": "2026-02-12",
+      "pitchedBy": "Ava R.",
+      "status": "open",
+      "thesis": "Apple's installed base keeps customers inside an ecosystem of devices and services that is expensive to leave. Services revenue grows faster than hardware and carries higher margins. We think the market underrates how durable that switching cost is."
+    },
+    {
+      "ticker": "COST",
+      "company": "Costco Wholesale",
+      "sector": "Consumer Staples",
+      "dateAdded": "2026-02-26",
+      "pitchedBy": "Marcus T.",
+      "status": "open",
+      "thesis": "Costco makes most of its profit from memberships, not merchandise, and renewal rates stay above 90% in good times and bad. That gives it pricing power without ever gouging its customers. We wanted at least one steady compounder the whole club understands."
+    },
+    {
+      "ticker": "WM",
+      "company": "Waste Management",
+      "sector": "Industrials",
+      "dateAdded": "2026-03-19",
+      "pitchedBy": "Priya S.",
+      "status": "open",
+      "thesis": "Trash is a business nobody can pause: contracts are long, routes are local monopolies, and pricing rises with inflation. Waste Management also owns landfill capacity that rivals can't easily get permitted. It's the defensive anchor of the portfolio."
+    },
+    {
+      "ticker": "V",
+      "company": "Visa",
+      "sector": "Financials",
+      "dateAdded": "2026-04-09",
+      "pitchedBy": "Jonah K.",
+      "status": "open",
+      "thesis": "Visa takes a small toll on an enormous and growing volume of card payments without carrying credit risk itself. The network gets more valuable as more shops and cards join it. Margins are among the best of any large company we studied."
+    },
+    {
+      "ticker": "GOOGL",
+      "company": "Alphabet",
+      "sector": "Communication Services",
+      "dateAdded": "2026-05-21",
+      "pitchedBy": "Sofia M.",
+      "status": "open",
+      "thesis": "Search remains one of the most profitable businesses ever built, and it funds Alphabet's bets in cloud and AI. We debated the AI-disruption risk heavily before the vote. The club decided the price already reflected a lot of that fear."
+    },
+    {
+      "ticker": "PTON",
+      "company": "Peloton Interactive",
+      "sector": "Consumer Discretionary",
+      "dateAdded": "2026-01-15",
+      "dateClosed": "2026-04-24",
+      "pitchedBy": "Diego L.",
+      "status": "closed",
+      "thesis": "We believed the pandemic had permanently shifted fitness into the home and that Peloton's subscriber base would keep compounding from there.",
+      "whatWeLearned": "Demand that gets pulled forward isn't the same as demand that got bigger. We lost about 8% on a small position, and it taught us to size unproven theses small and to ask 'what has to stay true?' before every vote. Cheap tuition."
+    },
+    {
+      "ticker": "DIS",
+      "company": "The Walt Disney Company",
+      "sector": "Communication Services",
+      "dateAdded": "2026-01-15",
+      "dateClosed": "2026-06-05",
+      "pitchedBy": "Nina P.",
+      "status": "closed",
+      "thesis": "We bought Disney for the streaming turnaround and the pricing power of the parks business.",
+      "whatWeLearned": "We exited with a small gain, but the real win was process: when leadership and strategy changed, the original thesis no longer applied, so we re-voted instead of holding on autopilot. If the reason you bought changes, the position deserves a fresh decision."
+    }
+  ]
+}

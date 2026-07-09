@@ -135,16 +135,31 @@
         if (firstBad) firstBad.focus();
         return;
       }
-      const name = (form.querySelector('[name="firstName"]') || {}).value || '';
-      const success = document.getElementById('join-success');
-      const nameSlot = document.getElementById('success-name');
-      if (nameSlot) nameSlot.textContent = name ? (', ' + name.trim().split(' ')[0]) : '';
-      form.style.display = 'none';
-      if (success) {
-        success.classList.add('show');
-        success.scrollIntoView ? null : null;
-        window.scrollTo({ top: Math.max(0, success.getBoundingClientRect().top + window.scrollY - 120), behavior: 'smooth' });
-      }
+
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const errEl = document.getElementById('join-submit-error');
+      if (errEl) errEl.style.display = 'none';
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.style.opacity = '.6'; }
+
+      fetch(form.action, {
+        method: 'POST',
+        headers: { Accept: 'application/json' },
+        body: new FormData(form)
+      }).then(function (res) {
+        if (!res.ok) throw new Error('Submission failed');
+        const name = (form.querySelector('[name="firstName"]') || {}).value || '';
+        const success = document.getElementById('join-success');
+        const nameSlot = document.getElementById('success-name');
+        if (nameSlot) nameSlot.textContent = name ? (', ' + name.trim().split(' ')[0]) : '';
+        form.style.display = 'none';
+        if (success) {
+          success.classList.add('show');
+          window.scrollTo({ top: Math.max(0, success.getBoundingClientRect().top + window.scrollY - 120), behavior: 'smooth' });
+        }
+      }).catch(function () {
+        if (errEl) errEl.style.display = 'block';
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.style.opacity = ''; }
+      });
     });
   }
 

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portfolio: Mosaic</title>
+<meta name="description" content="Mosaic's shared student portfolio: what we own, why we own it, and what we learned from the positions we closed.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body data-screen-label="Portfolio">
+
+<!-- ============ HEADER ============ -->
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="index.html" aria-label="Mosaic home">
+      <img src="assets/logo-mark.png" alt="Mosaic logo">
+      <span class="wordmark">Mosaic</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span></button>
+      <ul class="nav-links">
+        <li><a href="index.html" data-page="index.html">Home</a></li>
+        <li><a href="curriculum.html" data-page="curriculum.html">Curriculum</a></li>
+        <li><a href="portfolio.html" data-page="portfolio.html">Portfolio</a></li>
+        <li><a href="about.html" data-page="about.html">About Us</a></li>
+        <li><a class="btn" href="join.html">Join Now <span class="arr" aria-hidden="true">→</span></a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- ============ PAGE HERO ============ -->
+  <section class="pagehero">
+    <div class="container">
+      <p class="eyebrow reveal">The Portfolio</p>
+      <h1 class="reveal" data-delay="1">One shared portfolio, decided together.</h1>
+      <p class="reveal" data-delay="2">Every holding below was researched, pitched, and voted on by members. We publish what we own, why we own it, and what we learned when we got it wrong.</p>
+      <p class="asof reveal" data-delay="3" id="asof-line">Holdings as of <b id="asof-date">…</b> · updated after each vote, no live price feeds</p>
+    </div>
+  </section>
+
+  <!-- ============ CURRENT HOLDINGS ============ -->
+  <section class="section">
+    <div class="container">
+      <div class="shead reveal">
+        <p class="eyebrow">Current holdings</p>
+        <h2>What we own right now.</h2>
+        <p class="lede">Each position exists because a member pitched it and the club voted it in. The pitch credit stays with the position for as long as we hold it.</p>
+        <span class="data-note" id="sample-note">Sample data: edit portfolio-data.json and pitches.json to publish real holdings</span>
+      </div>
+      <div class="holdings-grid" id="holdings-grid"></div>
+    </div>
+  </section>
+
+  <!-- ============ CLOSED POSITIONS ============ -->
+  <section class="section section-problem" id="closed-section">
+    <div class="container">
+      <div class="shead reveal">
+        <p class="eyebrow">Closed positions</p>
+        <h2>Exits are lessons, not failures.</h2>
+        <p class="lede">We publish every position we exit, including the ones that lost money. A small loss that teaches the whole club something is a win we get to keep forever.</p>
+      </div>
+      <div class="closed-grid" id="closed-grid"></div>
+    </div>
+  </section>
+
+  <!-- ============ HOW THE MONEY WORKS ============ -->
+  <section class="section section--tight">
+    <div class="container">
+      <div class="who-card reveal">
+        <h3>How the money works</h3>
+        <p>Contributions to Mosaic are donations to the club's shared portfolio, not personal investments: members don't own individual shares and contributions aren't returned. Members research, pitch, and vote together to direct the portfolio as a learning exercise, and an adult officer executes every trade. No student ever handles the money, and nobody has to contribute to participate.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PITCH BOARD ============ -->
+  <section class="section">
+    <div class="container">
+      <div class="shead reveal">
+        <p class="eyebrow">Pitch board</p>
+        <h2>What members are pitching next.</h2>
+        <p class="lede">Pitches move from discussion to a member vote in our meetings. This board is the public record of what's on the table and how each pitch turned out.</p>
+      </div>
+      <div class="pitch-grid" id="pitch-grid"></div>
+    </div>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <section class="section section--tight">
+    <div class="container">
+      <div class="cta-band reveal">
+        <h2>Want a vote on the next pick?</h2>
+        <p>Every member researches, pitches, and votes. Open to high schoolers 18 and under, anywhere in the world.</p>
+        <div class="hero-cta">
+          <a class="btn btn--gold btn--lg" href="join.html">Join Now <span class="arr" aria-hidden="true">→</span></a>
+          <a class="btn btn--on-teal-ghost btn--lg" href="about.html">Learn about Mosaic</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a class="brand" href="index.html" aria-label="Mosaic home">
+          <img src="assets/logo-mark-light.png" alt="Mosaic logo">
+          <span class="wordmark">Mosaic</span>
+        </a>
+        <p>A student-led investment nonprofit teaching teens financial literacy through real investing.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="curriculum.html">Curriculum</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="join.html">Join Now</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Get involved</h4>
+        <ul>
+          <li><a href="join.html">Become a member</a></li>
+          <li><a href="about.html">Why join</a></li>
+          <li><a href="mailto:hello@mosaicinvest.org">Contact us</a></li>
+          <li><a href="join.html">Partner with us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bot">
+      <span>© <span id="year">2026</span> Mosaic. A student-led nonprofit initiative.</span>
+      <span class="badge">Built by students, for students</span>
+    </div>
+  </div>
+</footer>
+
+<script src="site.js"></script>
+<script src="portfolio.js"></script>
+</body>
+</html>
