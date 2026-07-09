@@ -1,8 +1,8 @@
 /* ===========================================================
    Mosaic, portfolio page
-   Renders portfolio.html from portfolio-data.json and
-   pitches.json so students can update holdings and pitches
-   without touching HTML.
+   Renders the public holdings from portfolio-data.json so
+   students can update them without touching HTML. The live
+   pitches & voting section is handled by members.js.
    =========================================================== */
 (function () {
   'use strict';
@@ -10,7 +10,6 @@
   var holdingsGrid = document.getElementById('holdings-grid');
   var closedGrid = document.getElementById('closed-grid');
   var closedSection = document.getElementById('closed-section');
-  var pitchGrid = document.getElementById('pitch-grid');
   var sampleNote = document.getElementById('sample-note');
 
   function esc(s) {
@@ -27,13 +26,6 @@
     if (p.length !== 3) return esc(iso);
     return MONTHS[+p[1] - 1] + ' ' + (+p[2]) + ', ' + p[0];
   }
-
-  var PILLS = {
-    'in discussion': ['pill--discussion', 'In discussion'],
-    'voting soon':   ['pill--voting', 'Voting soon'],
-    'approved':      ['pill--approved', 'Approved'],
-    'declined':      ['pill--declined', 'Declined']
-  };
 
   function markSample(data) {
     if (data && data.sampleData && sampleNote) sampleNote.classList.add('show');
@@ -96,32 +88,4 @@
       if (closedSection) closedSection.style.display = 'none';
       fail(holdingsGrid, 'portfolio data');
     });
-
-  /* ---------- pitch board ---------- */
-  function pitchCard(p) {
-    var pill = PILLS[String(p.status || '').toLowerCase()];
-    return '<article class="pitch-card">' +
-      '<div class="h-top">' +
-        '<div class="h-id"><span class="h-tick">' + esc(p.ticker) + '</span></div>' +
-        (pill ? '<span class="pill ' + pill[0] + '">' + pill[1] + '</span>' : '') +
-      '</div>' +
-      '<p class="h-thesis">' + esc(p.thesisSummary) + '</p>' +
-      (p.keyRisks ? '<div class="p-risks"><b>Key risks</b>' + esc(p.keyRisks) + '</div>' : '') +
-      '<div class="h-meta">' +
-        (p.pitcher ? '<span>Pitched by <b>' + esc(p.pitcher) + '</b></span>' : '') +
-        (p.date ? '<span>' + fmtDate(p.date) + '</span>' : '') +
-      '</div>' +
-    '</article>';
-  }
-
-  fetch('pitches.json', { cache: 'no-store' })
-    .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
-    .then(function (data) {
-      markSample(data);
-      var pitches = data.pitches || [];
-      pitchGrid.innerHTML = pitches.length
-        ? pitches.map(pitchCard).join('')
-        : '<p class="load-err">No open pitches right now.</p>';
-    })
-    .catch(function () { fail(pitchGrid, 'the pitch board'); });
 })();
