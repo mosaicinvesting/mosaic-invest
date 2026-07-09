@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Members: Mosaic</title>
+<meta name="description" content="Mosaic members area: submit pitches, discuss, and vote.">
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body data-screen-label="Members">
+
+<!-- ============ HEADER ============ -->
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="index.html" aria-label="Mosaic home">
+      <img src="assets/logo-mark.png" alt="Mosaic logo">
+      <span class="wordmark">Mosaic</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span></button>
+      <ul class="nav-links">
+        <li><a href="index.html" data-page="index.html">Home</a></li>
+        <li><a href="curriculum.html" data-page="curriculum.html">Curriculum</a></li>
+        <li><a href="portfolio.html" data-page="portfolio.html">Portfolio</a></li>
+        <li><a href="about.html" data-page="about.html">About Us</a></li>
+        <li id="nav-signout-wrap" style="display:none"><a href="#" id="nav-signout">Sign out</a></li>
+        <li><a class="btn" href="join.html">Join Now <span class="arr" aria-hidden="true">→</span></a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="pagehero" style="min-height:auto">
+    <div class="container">
+      <p class="eyebrow">Members area</p>
+      <h1 style="margin-top:14px">The pitch and vote room.</h1>
+      <p id="members-sub">Sign in with your member email to submit pitches, read the discussion, and vote.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+
+      <!-- config warning (shown until Supabase keys are filled in) -->
+      <div id="cfg-warning" class="notice notice--warn" style="display:none">
+        <b>Not configured yet.</b> Open <code>members.js</code> and set <code>SUPABASE_URL</code> and
+        <code>SUPABASE_ANON_KEY</code> to your project's values (see PHASE2-SETUP.md).
+      </div>
+
+      <!-- generic message slot -->
+      <div id="flash" class="notice" style="display:none"></div>
+
+      <!-- ---------- SIGN IN ---------- -->
+      <div id="view-auth" class="mviews" style="display:none">
+        <div class="form-card" style="max-width:460px">
+          <h3 style="font-family:var(--display)">Member sign in</h3>
+          <p style="margin:10px 0 20px;color:var(--body);font-size:15.5px">
+            We'll email you a one-time sign-in link. Only approved member emails can sign in.
+          </p>
+          <form id="signin-form">
+            <div class="field">
+              <label for="email">Member email</label>
+              <input type="email" id="email" name="email" placeholder="you@example.com" required>
+            </div>
+            <div class="form-foot">
+              <button type="submit" class="btn btn--lg" style="width:100%;justify-content:center">
+                Email me a sign-in link
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- ---------- APP (signed in) ---------- -->
+      <div id="view-app" class="mviews" style="display:none">
+        <div class="mtabs" id="mtabs">
+          <button class="mtab is-active" data-tab="pitches">Pitches</button>
+          <button class="mtab" data-tab="new">Submit a pitch</button>
+          <button class="mtab" data-tab="officer" id="tab-officer" style="display:none">Officer tools</button>
+        </div>
+
+        <!-- Pitches list + detail -->
+        <div class="mtab-panel" data-panel="pitches">
+          <div id="pitch-list"></div>
+        </div>
+
+        <!-- Submit a pitch -->
+        <div class="mtab-panel" data-panel="new" style="display:none">
+          <div class="form-card" style="max-width:720px">
+            <h3 style="font-family:var(--display)">Submit a pitch</h3>
+            <p style="margin:10px 0 20px;color:var(--body);font-size:15px">
+              A reviewer checks that your pitch has a real thesis, named risks, and some valuation logic before it
+              goes to the club. It never decides whether to buy, it just makes sure the pitch is complete. If
+              anything's thin, you'll get specific notes to revise, not a rejection.
+            </p>
+            <div id="ai-feedback" class="ai-feedback" style="display:none"></div>
+            <form id="pitch-form">
+              <div class="field row2">
+                <div class="field">
+                  <label for="p-ticker">Ticker <span class="req">*</span></label>
+                  <input type="text" id="p-ticker" name="ticker" placeholder="AAPL" required>
+                </div>
+                <div class="field">
+                  <label for="p-type">Pitch type <span class="req">*</span></label>
+                  <select id="p-type" name="pitch_type">
+                    <option value="buy">Buy (open a new position)</option>
+                    <option value="sell">Sell (exit a holding)</option>
+                  </select>
+                </div>
+              </div>
+              <div class="field" id="holding-wrap" style="display:none">
+                <label for="p-holding">Which holding? <span class="req">*</span></label>
+                <select id="p-holding" name="related_holding"></select>
+              </div>
+              <div class="field">
+                <label for="p-thesis">Thesis <span class="req">*</span></label>
+                <textarea id="p-thesis" name="thesis" placeholder="Why should the club own (or exit) this? What has to be true?" required></textarea>
+              </div>
+              <div class="field">
+                <label for="p-risks">Key risks <span class="req">*</span></label>
+                <textarea id="p-risks" name="key_risks" placeholder="Name the specific things that could go wrong." required></textarea>
+              </div>
+              <div class="field">
+                <label for="p-val">Valuation reasoning <span class="req">*</span></label>
+                <textarea id="p-val" name="valuation" placeholder="Roughly, why does the price make sense? A multiple, a comparison, a number." required></textarea>
+              </div>
+              <div class="form-foot">
+                <button type="submit" class="btn btn--lg" id="pitch-submit" style="width:100%;justify-content:center">
+                  Run quality check &amp; submit
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Officer tools -->
+        <div class="mtab-panel" data-panel="officer" style="display:none">
+          <div id="officer-panel"></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-bot">
+      <span>© <span id="year">2026</span> Mosaic. A student-led nonprofit initiative.</span>
+      <span class="badge">Members area</span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="site.js"></script>
+<script src="members.js"></script>
+</body>
+</html>
