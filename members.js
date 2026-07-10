@@ -100,10 +100,13 @@ var SUPABASE_ANON_KEY = (window.MOSAIC_SB || {}).key || 'sb_publishable_W4wKpdrh
         .then(function (r) {
           me = r.data;
           if (!me || !me.active || ['member', 'officer'].indexOf(me.role) === -1) {
-            showSignedOut();
-            say('You\'re signed in as <b>' + esc(session.user.email) + '</b>, but that email isn\'t on the member '
-              + 'list yet. Ask an officer to add you, then sign in again.', 'warn');
+            // signed in, but not yet an approved member: a friendly pending state
+            $('#view-auth').style.display = 'none';
+            $('#view-app').style.display = 'none';
             $('#nav-signout-wrap').style.display = '';
+            say('You\'re signed in as <b>' + esc(session.user.email) + '</b>. Your membership is pending officer '
+              + 'approval, so pitching and voting are locked for now. You can browse the portfolio in the meantime, '
+              + 'and this page unlocks automatically once an officer approves you (refresh after they do).', 'ok');
             return;
           }
           showApp();

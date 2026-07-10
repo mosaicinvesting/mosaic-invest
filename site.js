@@ -175,11 +175,25 @@ window.MOSAIC_SB = {
         body: JSON.stringify(application)
       }).then(function (res) {
         if (!res.ok) throw new Error('Submission failed');
-        // best-effort email notification; the application is already saved
+
+        // create their account (magic link) so applying == having an account;
+        // they land 'pending' until an officer approves them for voting
+        if (window.supabase && window.MOSAIC_SB) {
+          try {
+            window.supabase.createClient(window.MOSAIC_SB.url, window.MOSAIC_SB.key)
+              .auth.signInWithOtp({
+                email: application.email,
+                options: { emailRedirectTo: 'https://mosaicinvesting.org/portfolio' }
+              });
+          } catch (ignored) { /* account link is best-effort */ }
+        }
+
+        // best-effort email notification to officers; the application is already saved
         try {
           fetch(form.action, { method: 'POST', headers: { Accept: 'application/json' }, body: new FormData(form) })
             .catch(function () {});
         } catch (ignored) { /* notification only */ }
+
         const name = application.first_name;
         const success = document.getElementById('join-success');
         const nameSlot = document.getElementById('success-name');
