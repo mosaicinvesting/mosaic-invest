@@ -53,6 +53,7 @@
         ? '<div class="lesson"><b>What we learned</b><p>' + esc(h.whatWeLearned) + '</p></div>'
         : '') +
       '<div class="h-meta">' +
+        (h.allocation ? '<span><b>' + esc(h.allocation) + '</b> of portfolio</span>' : '') +
         (h.pitchedBy ? '<span>Pitched by <b>' + esc(h.pitchedBy) + '</b></span>' : '') +
         (h.dateAdded ? '<span>Added ' + fmtDate(h.dateAdded) + '</span>' : '') +
         (closed && h.dateClosed ? '<span>Exited ' + fmtDate(h.dateClosed) + '</span>' : '') +

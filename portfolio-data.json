@@ -1,101 +1,82 @@
 {
-  "_note": "SAMPLE DATA for layout preview only. Replace with Mosaic's real positions, then set sampleData to false to hide the sample-data badge on the site. Dates are YYYY-MM-DD. Each holding needs: ticker, company, sector, dateAdded, pitchedBy (first name + last initial), status ('open' or 'closed'), thesis (2-4 sentences). Closed positions should also include whatWeLearned and dateClosed. valueHistory drives the performance chart: officer-logged snapshots of the portfolio's total value, one {date, value} row per entry; append a row after each meeting. Delete all rows to hide the chart.",
-  "sampleData": true,
-  "asOf": "2026-07-01",
+  "_note": "REAL HOLDINGS as of 2026-07-09. Theses below are drafts written for the club to review and edit; replace with the club's actual reasoning where it differs. Add pitchedBy (first name + last initial) and dateAdded (YYYY-MM-DD) to any holding when known; cards only show those fields when present. allocation is the position's share of the account total. valueHistory drives the performance chart: append one { date, value } row per meeting using the brokerage account total.",
+  "sampleData": false,
+  "asOf": "2026-07-09",
   "valueHistory": [
-    { "date": "2026-01-15", "value": 1150 },
-    { "date": "2026-01-22", "value": 1240 },
-    { "date": "2026-01-29", "value": 1310 },
-    { "date": "2026-02-05", "value": 1495 },
-    { "date": "2026-02-12", "value": 1620 },
-    { "date": "2026-02-19", "value": 1685 },
-    { "date": "2026-02-26", "value": 1840 },
-    { "date": "2026-03-05", "value": 1905 },
-    { "date": "2026-03-12", "value": 1870 },
-    { "date": "2026-03-19", "value": 2140 },
-    { "date": "2026-03-26", "value": 2085 },
-    { "date": "2026-04-02", "value": 2010 },
-    { "date": "2026-04-09", "value": 2260 },
-    { "date": "2026-04-16", "value": 2195 },
-    { "date": "2026-04-24", "value": 2230 },
-    { "date": "2026-04-30", "value": 2410 },
-    { "date": "2026-05-07", "value": 2520 },
-    { "date": "2026-05-14", "value": 2585 },
-    { "date": "2026-05-21", "value": 2890 },
-    { "date": "2026-05-28", "value": 2960 },
-    { "date": "2026-06-05", "value": 3050 },
-    { "date": "2026-06-11", "value": 3010 },
-    { "date": "2026-06-18", "value": 3125 },
-    { "date": "2026-06-25", "value": 3190 },
-    { "date": "2026-07-01", "value": 3240 }
+    { "date": "2025-11-01", "value": 1752 },
+    { "date": "2025-12-01", "value": 1807 },
+    { "date": "2026-01-01", "value": 1831 },
+    { "date": "2026-02-01", "value": 1788 },
+    { "date": "2026-03-01", "value": 1805 },
+    { "date": "2026-04-01", "value": 1671 },
+    { "date": "2026-05-01", "value": 1837 },
+    { "date": "2026-06-01", "value": 2050 },
+    { "date": "2026-07-09", "value": 1982 }
   ],
   "holdings": [
     {
-      "ticker": "AAPL",
-      "company": "Apple",
-      "sector": "Consumer Tech",
-      "dateAdded": "2026-02-12",
-      "pitchedBy": "Ava R.",
+      "ticker": "VOO",
+      "company": "Vanguard S&P 500 ETF",
+      "sector": "Index ETF",
+      "allocation": "24.0%",
       "status": "open",
-      "thesis": "Apple's installed base keeps customers inside an ecosystem of devices and services that is expensive to leave. Services revenue grows faster than hardware and carries higher margins. We think the market underrates how durable that switching cost is."
+      "thesis": "VOO serves as the foundation of the portfolio by investing in 500 of the largest publicly traded U.S. companies across a wide range of industries. Rather than relying on individual stock selection, it captures the long-term growth of the U.S. economy and corporate earnings. Its low fees, broad diversification, and consistent performance make it a core holding intended to compound value over many years."
     },
     {
-      "ticker": "COST",
-      "company": "Costco Wholesale",
-      "sector": "Consumer Staples",
-      "dateAdded": "2026-02-26",
-      "pitchedBy": "Marcus T.",
+      "ticker": "GLD",
+      "company": "SPDR Gold Shares",
+      "sector": "Gold ETF",
+      "allocation": "10.1%",
       "status": "open",
-      "thesis": "Costco makes most of its profit from memberships, not merchandise, and renewal rates stay above 90% in good times and bad. That gives it pricing power without ever gouging its customers. We wanted at least one steady compounder the whole club understands."
+      "thesis": "GLD is held as a hedge against inflation, economic uncertainty, and geopolitical events that can negatively affect equity markets. Gold has historically performed differently than stocks, helping improve diversification during periods of market stress. While it is not expected to match the long-term returns of equities, it provides stability and helps preserve purchasing power."
     },
     {
-      "ticker": "WM",
-      "company": "Waste Management",
-      "sector": "Industrials",
-      "dateAdded": "2026-03-19",
-      "pitchedBy": "Priya S.",
+      "ticker": "QQQM",
+      "company": "Invesco NASDAQ 100 ETF",
+      "sector": "Tech ETF",
+      "allocation": "10%",
       "status": "open",
-      "thesis": "Trash is a business nobody can pause: contracts are long, routes are local monopolies, and pricing rises with inflation. Waste Management also owns landfill capacity that rivals can't easily get permitted. It's the defensive anchor of the portfolio."
+      "thesis": "QQQM increases the portfolio's allocation to many of the world's leading technology and growth companies. Long-term trends such as artificial intelligence, cloud computing, and digital services are expected to continue driving earnings growth for many of its holdings. Although it can experience larger price swings than the broader market, its long-term growth potential supports its role in the portfolio."
     },
     {
-      "ticker": "V",
-      "company": "Visa",
-      "sector": "Financials",
-      "dateAdded": "2026-04-09",
-      "pitchedBy": "Jonah K.",
+      "ticker": "CRWD",
+      "company": "CrowdStrike Holdings",
+      "sector": "Cybersecurity",
+      "allocation": "5%",
       "status": "open",
-      "thesis": "Visa takes a small toll on an enormous and growing volume of card payments without carrying credit risk itself. The network gets more valuable as more shops and cards join it. Margins are among the best of any large company we studied."
+      "thesis": "CrowdStrike is a leader in cloud-based cybersecurity, an industry expected to see sustained growth as cyber threats become more advanced. Its subscription-based business generates recurring revenue, and customers are often reluctant to switch once the platform is integrated into their operations. Continued demand for cybersecurity solutions should support long-term growth."
     },
     {
-      "ticker": "GOOGL",
-      "company": "Alphabet",
+      "ticker": "TSM",
+      "company": "Taiwan Semiconductor (ADR)",
+      "sector": "Semiconductors",
+      "allocation": "4.2%",
+      "status": "open",
+      "thesis": "TSMC manufactures advanced chips for many of the world's largest technology companies, making it a critical part of the global semiconductor industry. Years of manufacturing expertise and significant investment in new production capacity have created a strong competitive advantage that is difficult to replicate. As demand for AI, smartphones, and high-performance computing grows, the company is well positioned to benefit."
+    },
+    {
+      "ticker": "META",
+      "company": "Meta Platforms",
       "sector": "Communication Services",
-      "dateAdded": "2026-05-21",
-      "pitchedBy": "Sofia M.",
+      "allocation": "4.6%",
       "status": "open",
-      "thesis": "Search remains one of the most profitable businesses ever built, and it funds Alphabet's bets in cloud and AI. We debated the AI-disruption risk heavily before the vote. The club decided the price already reflected a lot of that fear."
+      "thesis": "Meta operates some of the world's largest social media platforms, giving it a powerful digital advertising business that generates substantial cash flow. The company is also investing heavily in artificial intelligence to improve user engagement and create new products. Its scale, financial strength, and large global user base position it well for long-term growth."
     },
     {
-      "ticker": "PTON",
-      "company": "Peloton Interactive",
-      "sector": "Consumer Discretionary",
-      "dateAdded": "2026-01-15",
-      "dateClosed": "2026-04-24",
-      "pitchedBy": "Diego L.",
-      "status": "closed",
-      "thesis": "We believed the pandemic had permanently shifted fitness into the home and that Peloton's subscriber base would keep compounding from there.",
-      "whatWeLearned": "Demand that gets pulled forward isn't the same as demand that got bigger. We lost about 8% on a small position, and it taught us to size unproven theses small and to ask 'what has to stay true?' before every vote. Cheap tuition."
+      "ticker": "RIOT",
+      "company": "Riot Platforms",
+      "sector": "Crypto Mining",
+      "allocation": "3.5%",
+      "status": "open",
+      "thesis": "Riot provides indirect exposure to the long-term growth potential of Bitcoin through its mining operations. The company's performance is closely tied to Bitcoin prices, meaning it has greater upside during strong crypto markets but also experiences larger declines during downturns. Because of this higher risk, it serves as a smaller, more speculative position within the portfolio."
     },
     {
-      "ticker": "DIS",
-      "company": "The Walt Disney Company",
-      "sector": "Communication Services",
-      "dateAdded": "2026-01-15",
-      "dateClosed": "2026-06-05",
-      "pitchedBy": "Nina P.",
-      "status": "closed",
-      "thesis": "We bought Disney for the streaming turnaround and the pricing power of the parks business.",
-      "whatWeLearned": "We exited with a small gain, but the real win was process: when leadership and strategy changed, the original thesis no longer applied, so we re-voted instead of holding on autopilot. If the reason you bought changes, the position deserves a fresh decision."
+      "ticker": "NVDA",
+      "company": "NVIDIA",
+      "sector": "Semiconductors",
+      "allocation": "5%",
+      "status": "open",
+      "thesis": "NVIDIA is the market leader in AI chips and has built a strong competitive advantage through its combination of hardware, software, and developer tools. As businesses, cloud providers, and governments continue investing in artificial intelligence, demand for its products is expected to remain strong. Although the stock trades at a premium valuation, its leadership position and long-term growth prospects support its place in the portfolio."
     }
   ]
 }

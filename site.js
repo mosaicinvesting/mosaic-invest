@@ -4,8 +4,16 @@
    - active nav link
    - reveal on scroll
    - animated stat counters
-   - join form validation + success state
+   - join form validation + application submission + success state
    =========================================================== */
+
+/* Supabase project config (safe to be public; row-level security
+   protects the data). Single source for site.js and members.js. */
+window.MOSAIC_SB = {
+  url: 'https://acormyhaxaerwbkzcvag.supabase.co',
+  key: 'sb_publishable_W4wKpdrhSlVWJVKrC8T6wQ_09Jcl_WI'
+};
+
 (function () {
   'use strict';
 
@@ -141,16 +149,41 @@
       if (errEl) errEl.style.display = 'none';
       if (submitBtn) { submitBtn.disabled = true; submitBtn.style.opacity = '.6'; }
 
-      fetch(form.action, {
+      const val = function (n) {
+        const el = form.querySelector('[name="' + n + '"]');
+        return el ? el.value.trim() : '';
+      };
+      const application = {
+        first_name: val('firstName'),
+        last_name: val('lastName'),
+        email: val('email').toLowerCase(),
+        age: parseInt(val('age'), 10) || null,
+        country: val('country'),
+        why: val('why')
+      };
+
+      // primary: save the application where officers review it (same system
+      // that runs member sign-in on the portfolio page)
+      fetch(window.MOSAIC_SB.url + '/rest/v1/membership_applications', {
         method: 'POST',
-        headers: { Accept: 'application/json' },
-        body: new FormData(form)
+        headers: {
+          'Content-Type': 'application/json',
+          apikey: window.MOSAIC_SB.key,
+          Authorization: 'Bearer ' + window.MOSAIC_SB.key,
+          Prefer: 'return=minimal'
+        },
+        body: JSON.stringify(application)
       }).then(function (res) {
         if (!res.ok) throw new Error('Submission failed');
-        const name = (form.querySelector('[name="firstName"]') || {}).value || '';
+        // best-effort email notification; the application is already saved
+        try {
+          fetch(form.action, { method: 'POST', headers: { Accept: 'application/json' }, body: new FormData(form) })
+            .catch(function () {});
+        } catch (ignored) { /* notification only */ }
+        const name = application.first_name;
         const success = document.getElementById('join-success');
         const nameSlot = document.getElementById('success-name');
-        if (nameSlot) nameSlot.textContent = name ? (', ' + name.trim().split(' ')[0]) : '';
+        if (nameSlot) nameSlot.textContent = name ? (', ' + name.split(' ')[0]) : '';
         form.style.display = 'none';
         if (success) {
           success.classList.add('show');
