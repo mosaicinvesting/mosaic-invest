@@ -6,6 +6,35 @@
 <title>About Us: Mosaic</title>
 <meta name="description" content="Why Mosaic exists, who it's for, and why high schoolers around the world join.">
 <link rel="stylesheet" href="styles.css">
+<style>
+  /* ---------- team (scoped) ---------- */
+  .team-founder { display:grid; grid-template-columns: auto 1fr; gap: clamp(20px,4vw,40px);
+    align-items:start; background: var(--paper); border:1px solid var(--line); border-radius: var(--radius);
+    padding: clamp(26px,4vw,44px); box-shadow: var(--shadow-sm); }
+  @media (max-width:640px){ .team-founder { grid-template-columns:1fr; } }
+  .avatar { width:96px; height:96px; border-radius:50%; display:grid; place-items:center;
+    font-family: var(--display); font-weight:700; font-size:34px; color:#fff; background: var(--teal); letter-spacing:.02em; }
+  .avatar--gold { background: var(--gold); color:#2a1d05; }
+  .team-founder .t-role { font-family: var(--display); font-size:13px; font-weight:600; letter-spacing:.12em;
+    text-transform:uppercase; color: var(--gold-600); }
+  .team-founder h3 { font-size: clamp(24px,3vw,30px); margin-top:4px; }
+  .team-founder p { color: var(--body); margin-top:16px; line-height:1.72; }
+  .team-founder p + p { margin-top:14px; }
+
+  .team-grid { display:grid; grid-template-columns: repeat(4,1fr); gap:18px; margin-top:22px; }
+  @media (max-width:820px){ .team-grid { grid-template-columns: repeat(2,1fr); } }
+  @media (max-width:460px){ .team-grid { grid-template-columns: 1fr; } }
+  .team-card { background: var(--paper); border:1px solid var(--line); border-radius: var(--radius-sm);
+    padding:26px 22px; text-align:center; box-shadow: var(--shadow-sm); transition:.2s var(--ease); }
+  .team-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); border-color: var(--teal-tint-2); }
+  .team-card .avatar { margin:0 auto 16px; width:72px; height:72px; font-size:26px; }
+  .team-card h4 { font-family: var(--display); font-size:18px; font-weight:600; color: var(--ink); }
+  .team-card span { display:block; margin-top:7px; font-size:12.5px; font-weight:600; letter-spacing:.08em;
+    text-transform:uppercase; color: var(--gold-600); }
+  .team-card span.t-loc { margin-top:6px; font-size:13px; font-weight:500; letter-spacing:normal;
+    text-transform:none; color: var(--muted); }
+  .team-founder .t-loc { margin-top:5px; font-size:14px; color: var(--muted); }
+</style>
 </head>
 <body data-screen-label="About Us">
 
@@ -45,6 +74,34 @@
       <div class="shead reveal" style="max-width:860px">
         <p class="eyebrow">Our mission</p>
         <p class="mission" style="margin-top:20px; color: rgb(24, 51, 60)">Give every teenager the chance to build real financial confidence: through an educational curriculum, a portfolio they help <span class="hl" style="color: #18333c">build</span>, and a community that learns <span class="hl" style="color: #18333c">together</span>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TEAM ============ -->
+  <section class="section section--tight" style="padding-top:0">
+    <div class="container">
+      <div class="shead reveal" style="margin-bottom:28px">
+        <p class="eyebrow">Our team</p>
+        <h2 style="font-size:clamp(28px,4vw,44px);margin-top:16px">The students behind Mosaic.</h2>
+      </div>
+
+      <div class="team-founder reveal">
+        <div class="avatar avatar--gold">JT</div>
+        <div>
+          <p class="t-role">Founder &amp; CEO</p>
+          <h3>Jayden Tu</h3>
+          <p class="t-loc">Seattle, WA</p>
+          <p>Jayden started paying attention to the stock market as an elementary schooler. What started as an interest grew into a habit of investing and a passion for how markets work.</p>
+          <p>The more he learned, he realized how almost none of it was taught in school. He was picking up knowledge on his own time, from the news and his own research. That gap is why he built Mosaic, a place where teens don't just read about investing but actually do it together, with real stakes and a real say.</p>
+        </div>
+      </div>
+
+      <div class="team-grid reveal" data-delay="1">
+        <div class="team-card"><div class="avatar">RC</div><h4>Roman Capello</h4><span>Education Officer</span><span class="t-loc">Seattle, WA</span></div>
+        <div class="team-card"><div class="avatar">AL</div><h4>Aarav Laddad</h4><span>Investing Officer</span><span class="t-loc">Seattle, WA</span></div>
+        <div class="team-card"><div class="avatar">MD</div><h4>Matthew Dai</h4><span>Research Coordinator</span><span class="t-loc">Seattle, WA</span></div>
+        <div class="team-card"><div class="avatar">FP</div><h4>Fareed Pirzada</h4><span>Marketing Officer</span><span class="t-loc">Seattle, WA</span></div>
       </div>
     </div>
   </section>
