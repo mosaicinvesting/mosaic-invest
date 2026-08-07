@@ -101,6 +101,13 @@
   border-radius:10px; padding:12px 15px; border-left:3px solid var(--teal-600); }
 .explain.show { display:block; }
 
+/* "try it yourself" worked example */
+.tryit { margin-top: 22px; background: var(--teal-tint); border-radius: var(--radius-sm); padding: 16px 20px; }
+.tryit .ti-label { font-family: var(--display); font-weight:700; font-size:15px; color: var(--teal-700);
+  margin-bottom:6px; display:block; }
+.tryit p { color: var(--body); font-size:15.5px; line-height:1.6; }
+.tryit .ti-check { margin-top:8px; color: var(--muted); font-size:14.5px; }
+
 .response { margin-top: 24px; }
 .response .r-label { display:none; }
 .response .prompt { color: var(--ink); font-weight:600; margin:0; font-size:16.5px; }
