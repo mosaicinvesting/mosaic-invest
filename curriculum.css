@@ -132,3 +132,19 @@
   padding: clamp(24px,4vw,38px); }
 .parent-note h3 { color:#fff; font-size:20px; }
 .parent-note p { color:rgba(255,255,255,.85); margin-top:12px; line-height:1.6; }
+
+/* impact confidence prompt (before/after a course) */
+.impact-prompt { background: var(--paper); border:1px solid var(--line); border-top: 3px solid var(--teal-600);
+  border-radius: var(--radius); padding: clamp(20px,3.5vw,30px); margin-bottom: 30px; }
+.impact-prompt .ip-q { font-family: var(--display); font-weight:600; font-size:17px; color: var(--ink); }
+.impact-prompt .ip-scale { display:flex; flex-wrap:wrap; gap:8px; margin-top:16px; }
+.impact-prompt .ip-scale button { width:38px; height:38px; border-radius:8px; border:1.5px solid var(--line);
+  background: var(--bg); font: inherit; font-weight:600; color: var(--body); cursor:pointer; transition:.15s var(--ease); }
+.impact-prompt .ip-scale button:hover { border-color: var(--teal-tint-2); background: var(--teal-tint); color: var(--ink); }
+.impact-prompt .ip-foot { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:14px; }
+.impact-prompt .ip-note { font-size:13px; color: var(--muted); }
+.impact-prompt .ip-skip { font-size:13.5px; font-weight:600; color: var(--muted); background:none; border:none;
+  cursor:pointer; text-decoration:underline; padding:0; font-family: inherit; }
+.impact-prompt .ip-skip:hover { color: var(--ink); }
+.impact-prompt.ip-done { display:none; }
+.impact-prompt .ip-thanks { font-size:15px; color: var(--teal-700); font-weight:600; }
