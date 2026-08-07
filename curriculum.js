@@ -64,10 +64,9 @@
   }
 
   /* ===========================================================
-     Impact tracking: one optional confidence question before a
-     course and one after, sent anonymously so Mosaic can show
-     real numbers on the Impact page. Always skippable, never
-     blocks reading, fires at most once per browser per course.
+     Impact tracking: one confidence question before a course and
+     one after, so Mosaic can show real numbers on the Impact page.
+     Never blocks reading; fires at most once per browser per course.
      =========================================================== */
   var COURSE = /markets/.test(location.pathname) ? 'markets' : 'foundations';
 
@@ -102,7 +101,7 @@
       '<p class="ip-q">' + question + '</p>' +
       '<div class="ip-scale" role="group" aria-label="Confidence, 1 to 10"></div>' +
       '<div class="ip-foot">' +
-        '<span class="ip-note">Anonymous, optional, and shown only as an average on our Impact page.</span>' +
+        '<span class="ip-note">Shown only as an average on our Impact page.</span>' +
         '<button type="button" class="ip-skip">Skip</button>' +
       '</div>';
     var scale = card.querySelector('.ip-scale');
