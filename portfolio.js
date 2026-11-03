@@ -151,7 +151,7 @@
       var step = niceStep((max - min) / 4);
       var t0 = Math.floor(min / step) * step;
       var ticks = [];
-      for (var v = t0; v < max + step * 0.5; v += step) ticks.push(v);
+      for (var v = t0; ticks.length < 2 || ticks[ticks.length - 1] < max; v += step) ticks.push(v);
       return ticks;
     }
 
